@@ -56,8 +56,13 @@
                          </p>
                      </a>
                  </li>
+                 @if (Session::get('page') == 'update-password' || Session::get('page') == 'update-details')
+                     @php $active = "active" @endphp
+                 @else
+                     @php $active = "" @endphp
+                 @endif
                  <li class="nav-item menu-open">
-                     <a href="#" class="nav-link active">
+                     <a href="#" class="nav-link {{ $active }}">
                          <i class="nav-icon fas fa-tachometer-alt"></i>
                          <p>
                              Settings
