@@ -29,6 +29,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">CMS Pages</h3>
+                                <a style="max-width: 150px; float: right; display: inline-block;"
+                                    href="{{ url('admin/add-edit-cms-page') }}" class="btn btn-block btn-primary">Add CMS
+                                    Page</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -49,7 +52,18 @@
                                                 <td>{{ $page['title'] }}</td>
                                                 <td>{{ $page['url'] }}</td>
                                                 <td>{{ $page['created_at'] }}</td>
-                                                <td>X</td>
+                                                <td>
+                                                    @if ($page['status'] == 1)
+                                                        <a class="updateCmsPageStatus" id="page-{{ $page['id'] }}"
+                                                            page_id="{{ $page['id'] }}" href="javascript:void(0)"><i
+                                                                class="fas fa-toggle-on" status="Active"></i></a>
+                                                    @else
+                                                        <a class="updateCmsPageStatus" id="page-{{ $page['id'] }}"
+                                                            page_id="{{ $page['id'] }}" style="color: gray;"
+                                                            href="javascript:void(0)"><i class="fas fa-toggle-off"
+                                                                status="Inactive"></i></a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

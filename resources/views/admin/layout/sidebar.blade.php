@@ -99,8 +99,6 @@
                          <i class="nav-icon fas fa-copy"></i>
                          <p>
                              CMS Pages
-                             {{-- <i class="fas fa-angle-left right"></i>
-                             <span class="badge badge-info right">6</span> --}}
                          </p>
                      </a>
                      <ul class="nav nav-treeview">
