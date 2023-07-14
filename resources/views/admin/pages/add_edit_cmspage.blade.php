@@ -43,9 +43,9 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="title">Email address</label>
-                                            <input type="email" class="form-control" id="title" name="title"
-                                                placeholder="Enter email">
+                                            <label for="title">Title</label>
+                                            <input type="text" class="form-control" id="title" name="title"
+                                                placeholder="Enter Title">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Password</label>
