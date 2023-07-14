@@ -13,7 +13,7 @@ class CmsController extends Controller
      */
     public function index()
     {
-        $CmsPage = CmsPage::get()->toArray();
+        $CmsPages = CmsPage::get()->toArray();
         // dd($CmsPage);
 
         return view('admin.pages.cms_pages')->with(compact('CmsPages'));
