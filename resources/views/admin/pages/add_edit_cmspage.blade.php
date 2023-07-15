@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description*</label>
-                                            <textarea name="description" id="description" rows="3" placeholder="Enter ..."></textarea>
+                                            <textarea name="description" id="description" rows="3" placeholder="Enter Description"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Submit</button>
