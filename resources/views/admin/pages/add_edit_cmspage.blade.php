@@ -38,6 +38,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                @if (Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error:</strong> {{ Session::get('error_message') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
                                 <form name="cmsForm" id="cmsForm" action="{{ url('admin/add-edit-cms-page') }}"
                                     method="post">
                                     @csrf
@@ -54,11 +72,27 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description*</label>
-                                            <textarea name="description" id="description" rows="3" placeholder="Enter Description"></textarea>
+                                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Enter Description"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <label for="meta_title">Meta Title</label>
+                                            <input type="text" class="form-control" id="meta_title" name="meta_title"
+                                                placeholder="Enter Meta Title">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="meta_description">Meta Description</label>
+                                            <input type="text" class="form-control" id="meta_description"
+                                                name="meta_description" placeholder="Enter Meta Description">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="meta_keywords">Meta Keywords</label>
+                                            <input type="text" class="form-control" id="meta_keywords"
+                                                name="meta_keywords" placeholder="Enter Meta Keywords">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">{{ $title }}</button>
+                                        </div>
+
                                     </div>
 
                                 </form>
