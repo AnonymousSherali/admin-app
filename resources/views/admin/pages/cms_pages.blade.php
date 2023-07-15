@@ -25,7 +25,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-
+                        @if (Session::has('success_message'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success:</strong> {{ Session::get('success_message') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">CMS Pages</h3>
@@ -51,7 +58,7 @@
                                                 <td>{{ $page['id'] }}</td>
                                                 <td>{{ $page['title'] }}</td>
                                                 <td>{{ $page['url'] }}</td>
-                                                <td>{{ $page['created_at'] }}</td>
+                                                <td>{{ date('F j, Y, g:i a', strtotime($page['created_at'])) }}</td>
                                                 <td>
                                                     @if ($page['status'] == 1)
                                                         <a class="updateCmsPageStatus" id="page-{{ $page['id'] }}"
@@ -63,6 +70,11 @@
                                                             href="javascript:void(0)"><i class="fas fa-toggle-off"
                                                                 status="Inactive"></i></a>
                                                     @endif
+                                                    &nbsp;&nbsp;
+                                                    <a style="color: #3f6ed3;"
+                                                        href="{{ url('admin/add-edit-cmspage/' . $page['id']) }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
