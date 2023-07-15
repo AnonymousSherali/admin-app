@@ -87,6 +87,8 @@
           $(".select2").select2();
       });
   </script>
+  {{-- SweetAlert 2 --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

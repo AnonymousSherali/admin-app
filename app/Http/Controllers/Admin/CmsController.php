@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CmsPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CmsController extends Controller
 {
@@ -13,6 +14,7 @@ class CmsController extends Controller
      */
     public function index()
     {
+        Session::put('page', 'cms-pages');
         $CmsPages = CmsPage::get()->toArray();
         // dd($CmsPage);
 
@@ -48,6 +50,7 @@ class CmsController extends Controller
      */
     public function edit(Request $request, $id = null)
     {
+        Session::put('page', 'cms-pages');
         if ($id == "") {
             $title = "Add CMS Page";
             $CmsPages = new CmsPage;
@@ -114,8 +117,9 @@ class CmsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CmsPage $cmsPage)
+    public function destroy($id)
     {
-        //
+        CmsPage::where('id', $id)->delete();
+        return redirect()->back()->with('success_message', 'CMS Page deleted successfully!');
     }
 }
