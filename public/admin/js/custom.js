@@ -81,7 +81,8 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire("Deleted!", "Your file has been deleted.", "success");
-                window.location.href = "/admin/delete" + record + "/" + recordid;
+                window.location.href =
+                    "/admin/delete-" + record + "/" + recordid;
             }
         });
     });
