@@ -42,6 +42,17 @@ class AdminController extends Controller
 
 
             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+
+                // Remember Admin Email & Password with cookies
+                if(isset($data['remember']) && !empty($data['remember'])){
+                    setcookie("email", $data['email'], time() + 3600);
+                    setcookie("password", $data['password'], time() + 3600);
+                } else {
+                    setcookie("email", "");
+                    setcookie("password", "");
+                }
+
+
                 return redirect("admin/dashboard");
             } else {
                 return redirect()->back()->with("error_message", "Invalid Email or Password");
@@ -135,4 +146,13 @@ class AdminController extends Controller
 
         return view('admin.update_details');
     }
+
+ 
+    public function subadmins() {
+        Session::put('page', 'subadmins');
+        $subadmins = Admin::where('type', 'subadmin')->get();
+        return view('admin.subadmins.subadmins')->with(compact('subadmins'));
+    }
+
+
 }
