@@ -37,7 +37,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">Sub Admins</h3>
                                 <a style="max-width: 150px; float: right; display: inline-block;"
-                                    href="{{ url('admin/add-edit-subadmin') }}" class="btn btn-block btn-primary">Add Sub Admin</a>
+                                    href="{{ url('admin/add-edit-subadmin') }}" class="btn btn-block btn-primary">Add Sub
+                                    Admin</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -57,33 +58,28 @@
                                         @foreach ($subadmins as $subadmin)
                                             <tr>
                                                 <td>{{ $subadmin->id }}</td>
-                                                <td>{{ $subadmin->name}}</td>
+                                                <td>{{ $subadmin->name }}</td>
                                                 <td>{{ $subadmin->mobile }}</td>
                                                 <td>{{ $subadmin->email }}</td>
-                                                <td>{{ $subadmin->type}}</td>
+                                                <td>{{ $subadmin->type }}</td>
                                                 <td>{{ date('F j, Y, g:i a', strtotime($subadmin->created_at)) }}</td>
                                                 <td>
-                                                    {{-- @if ($subadmin['status'] == 1)
-                                                        <a class="updateCmsPageStatus" id="page-{{ $subadmin['id'] }}"
-                                                            page_id="{{ $subadmin['id'] }}" href="javascript:void(0)"><i
+                                                    @if ($subadmin->status == 1)
+                                                        <a class="updateSubadminStatus" id="subadmin-{{ $subadmin->id }}"
+                                                            subadmin_id="{{ $subadmin->id }}" href="javascript:void(0)"><i
                                                                 class="fas fa-toggle-on" status="Active"></i></a>
                                                     @else
-                                                        <a class="updateCmsPageStatus" id="page-{{ $subadmin['id'] }}"
-                                                            page_id="{{ $subadmin['id'] }}" style="color: gray;"
+                                                        <a class="updateSubadminStatus" id="subadmin-{{ $subadmin->id }}"
+                                                            subadmin_id="{{ $subadmin->id }}" style="color: gray;"
                                                             href="javascript:void(0)"><i class="fas fa-toggle-off"
                                                                 status="Inactive"></i></a>
                                                     @endif
                                                     &nbsp;&nbsp;
-                                                    <a style="color: #3f6ed3;"
-                                                        href="{{ url('admin/add-edit-cms-page/' . $subadmin['id']) }}">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    &nbsp;&nbsp;
-                                                    <a style="color: #3f6ed3;" class="confirmDelete" name="CMS Page"
-                                                        title="Delete CMS Page" href="javascript:void(0)" record="cms-page" recordid="{{ $page['id'] }}"
-                                                        <?php /* href="{{ url('admin/delete-cms-page/' . $subadmin['id']) }}" */?>>
+                                                    <a style="color: #3f6ed3;" class="confirmDelete" name="Subadmin"
+                                                        title="Delete Subadmin" href="javascript:void(0)" record="subadmin"
+                                                        recordid="{{ $subadmin->id }}" <?php /*href = "{{ url('admin/delete-subadmin/' . $subadmin->id) }}"; */?>>
                                                         <i class="fas fa-trash"></i>
-                                                    </a> --}}
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
