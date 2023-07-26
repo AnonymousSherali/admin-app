@@ -176,5 +176,50 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Subadmin deleted successfully!');
     }
 
+    public function addEditSubadmin(Request $request, $id = null){
+
+        Session::put('page', 'subadmin');
+        if ($id == "") {
+            $title = "Add Subadmin";
+            $subadmindata = new Admin;
+            $message = "Subadmin added successfully!";
+        } else {
+            $title = "Edit Subadmin";
+            $subadmindata = Admin::find($id);
+            $message = "Subadmin updated successfully!";
+        }
+
+        // if($request->isMethod('post')){
+        //     $data = $request->all();
+        //     // echo "<pre>"; print_r($data); die;
+
+        //     $rules = [
+        //         'title' => 'required',
+        //         'url' => 'required',
+        //         'description' => 'required'
+        //     ];
+
+        //     $customMessage = [
+        //         'title.required' => 'Page Title is required',
+        //         'url.required' => 'Page Url is required',
+        //         'description.required' => 'Page Description is required'
+        //     ];
+
+        //     $this->validate($request, $rules, $customMessage);
+
+        //     $subadmindata->name = $data['name'];
+        //     $subadmindata->mobile = $data['mobile'];
+        //     $subadmindata->email = $data['email'];
+        //     $subadmindata->type = $data['type'];
+        //     $subadmindata->status = 1;
+        //     $subadmindata->save();
+
+        //     return redirect('admin/subadmin')->with('success_message', $message);
+
+        // }
+
+        return view('admin.subadmins.add_edit_subadmin')->with(compact('title', 'subadmindata'));
+    }
+
 
 }
