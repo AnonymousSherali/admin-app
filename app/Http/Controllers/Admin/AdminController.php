@@ -44,7 +44,7 @@ class AdminController extends Controller
             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
 
                 // Remember Admin Email & Password with cookies
-                if(isset($data['remember']) && !empty($data['remember'])){
+                if (isset($data['remember']) && !empty($data['remember'])) {
                     setcookie("email", $data['email'], time() + 3600);
                     setcookie("password", $data['password'], time() + 3600);
                 } else {
@@ -147,14 +147,16 @@ class AdminController extends Controller
         return view('admin.update_details');
     }
 
- 
-    public function subadmins() {
+
+    public function subadmins()
+    {
         Session::put('page', 'subadmins');
         $subadmins = Admin::where('type', 'subadmin')->get();
         return view('admin.subadmins.subadmins')->with(compact('subadmins'));
     }
 
-    public function updateSubadminStatus(Request $request){
+    public function updateSubadminStatus(Request $request)
+    {
 
         if ($request->ajax()) {
             $data = $request->all();
@@ -176,7 +178,8 @@ class AdminController extends Controller
         return redirect()->back()->with('success_message', 'Subadmin deleted successfully!');
     }
 
-    public function addEditSubadmin(Request $request, $id = null){
+    public function addEditSubadmin(Request $request, $id = null)
+    {
 
         Session::put('page', 'subadmin');
         if ($id == "") {
@@ -189,37 +192,64 @@ class AdminController extends Controller
             $message = "Subadmin updated successfully!";
         }
 
-        // if($request->isMethod('post')){
-        //     $data = $request->all();
-        //     // echo "<pre>"; print_r($data); die;
+        if ($request->isMethod('post')) {
+            $data = $request->all();
+            // echo "<pre>"; print_r($data); die;
 
-        //     $rules = [
-        //         'title' => 'required',
-        //         'url' => 'required',
-        //         'description' => 'required'
-        //     ];
+            if ($id == "") {
+                $subadminCount = Admin::where('email', $data['email'])->count();
+                if ($subadminCount > 0) {
+                    return redirect()->back()->with('error_message', 'Subadmin already exists!');
+                }
+            }
 
-        //     $customMessage = [
-        //         'title.required' => 'Page Title is required',
-        //         'url.required' => 'Page Url is required',
-        //         'description.required' => 'Page Description is required'
-        //     ];
+            // Subadmin Validations
 
-        //     $this->validate($request, $rules, $customMessage);
+            $rules = [
+                'name' => 'required',
+                'mobile' => 'required|numeric',
+                'image' => 'image'
+            ];
 
-        //     $subadmindata->name = $data['name'];
-        //     $subadmindata->mobile = $data['mobile'];
-        //     $subadmindata->email = $data['email'];
-        //     $subadmindata->type = $data['type'];
-        //     $subadmindata->status = 1;
-        //     $subadmindata->save();
+            $customMessage = [
+                'name.required' => 'Name is required',
+                'mobile.required' => 'Mobile is required',
+                'mobile.numeric' => 'Valid Mobile is required',
+                'image.image' => 'Valid Image is required'
+            ];
 
-        //     return redirect('admin/subadmin')->with('success_message', $message);
+            $this->validate($request, $rules, $customMessage);
 
-        // }
+            if ($request->hasFile('image')) {
+                $image_tmp = $request->file('image');
+                if ($image_tmp->isValid()) {
+                    $extension = $image_tmp->getClientOriginalExtension();
+
+                    $imageName = rand(111, 99999) . '.' . $extension;
+                    $image_path = 'admin/images/photos/' . $imageName;
+                    Image::make($image_tmp)->save($image_path);
+                }
+            } else if (!empty($data['current_image'])) {
+                $imageName = $data['current_image'];
+            } else {
+                $imageName = "";
+            }
+
+            $subadmindata->image = $imageName;
+            $subadmindata->name = $data['name'];
+            $subadmindata->mobile = $data['mobile'];
+            if($id == ""){
+                $subadmindata->email = $data['email'];
+                $subadmindata->type = 'subadmin';
+            }
+            if($data['password'] != ""){
+                $subadmindata->password = bcrypt($data['password']);
+            }
+
+            $subadmindata->save();
+
+        }
 
         return view('admin.subadmins.add_edit_subadmin')->with(compact('title', 'subadmindata'));
     }
-
-
 }

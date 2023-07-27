@@ -47,6 +47,16 @@
                                         </ul>
                                     </div>
                                 @endif
+
+                                @if (Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Error:</strong> {{ Session::get('error_message') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+
                                 <form name="subadminForm" id="subadminForm"
                                     @if (empty($subadmindata['id'])) action="{{ url('admin/add-edit-subadmin') }}" @else action="{{ url('admin/add-edit-subadmin/' . $subadmindata['id']) }}" @endif
                                     method="post" enctype="multipart/form-data">
