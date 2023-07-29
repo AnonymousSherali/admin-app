@@ -172,12 +172,6 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteSubadmin($id)
-    {
-        Admin::where('id', $id)->delete();
-        return redirect()->back()->with('success_message', 'Subadmin deleted successfully!');
-    }
-
     public function addEditSubadmin(Request $request, $id = null)
     {
 
@@ -238,6 +232,7 @@ class AdminController extends Controller
             $subadmindata->image = $imageName;
             $subadmindata->name = $data['name'];
             $subadmindata->mobile = $data['mobile'];
+            
             if($id == ""){
                 $subadmindata->email = $data['email'];
                 $subadmindata->type = 'subadmin';
@@ -247,9 +242,26 @@ class AdminController extends Controller
             }
 
             $subadmindata->save();
+            return redirect('admin/subadmins')->with('success_message', $message);
 
         }
 
         return view('admin.subadmins.add_edit_subadmin')->with(compact('title', 'subadmindata'));
     }
+
+    public function deleteSubadmin($id)
+    {
+        Admin::where('id', $id)->delete();
+        return redirect()->back()->with('success_message', 'Subadmin deleted successfully!');
+    }
+
+
+    public function updateRole($id){
+        $title = "Update Subadmin Roles/Permissions";
+        return view('admins.subadmins.update_roles')->with(compact('title', 'id'));
+    }
+
+
+
+
 }

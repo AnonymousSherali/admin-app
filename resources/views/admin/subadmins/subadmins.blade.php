@@ -75,10 +75,20 @@
                                                                 status="Inactive"></i></a>
                                                     @endif
                                                     &nbsp;&nbsp;
+                                                    <a style="color: #3f6ed3;"
+                                                        href="{{ url('admin/add-edit-subadmin/' . $subadmin->id) }}">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    &nbsp;&nbsp;
                                                     <a style="color: #3f6ed3;" class="confirmDelete" name="Subadmin"
                                                         title="Delete Subadmin" href="javascript:void(0)" record="subadmin"
                                                         recordid="{{ $subadmin->id }}" <?php /*href = "{{ url('admin/delete-subadmin/' . $subadmin->id) }}"; */?>>
                                                         <i class="fas fa-trash"></i>
+                                                    </a>
+                                                    &nbsp;&nbsp;
+                                                    <a style="color: #3f6ed3;"
+                                                        href="{{ url('admin/update-role/' . $subadmin->id) }}">
+                                                        <i class="fas fa-unlock"></i>
                                                     </a>
                                                 </td>
                                             </tr>

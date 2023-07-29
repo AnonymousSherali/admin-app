@@ -63,6 +63,20 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group col-md-6">
+                                            <label for="email">Email</label>
+                                            <input
+                                                @if ($subadmindata['id'] != '') disabled="" style="background-color: #666666" @else required="" @endif
+                                                type="email" class="form-control" id="email" name="email"
+                                                placeholder="Enter Subadmin Email"
+                                                @if (!empty($subadmindata['email'])) value="{{ $subadmindata['email'] }}" @endif>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="Enter Subadmin Password"
+                                                @if (!empty($subadmindata['password'])) value="{{ $subadmindata['password'] }}" @endif>
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label for="name">Name*</label>
                                             <input type="text" class="form-control" id="name" name="name"
                                                 placeholder="Enter Subadmin Name"
@@ -73,19 +87,6 @@
                                             <input type="text" class="form-control" id="mobile" name="mobile"
                                                 placeholder="Enter Subadmin Mobile"
                                                 @if (!empty($subadmindata['mobile'])) value="{{ $subadmindata['mobile'] }}" @endif>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="email">Email</label>
-                                            <input @if ($subadmindata['id'] != '') disabled="" @else required="" @endif
-                                                type="email" class="form-control" id="email" name="email"
-                                                placeholder="Enter Subadmin Email"
-                                                @if (!empty($subadmindata['email'])) value="{{ $subadmindata['email'] }}" @endif>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="password">Password</label>
-                                            <input type="text" class="form-control" id="password" name="password"
-                                                placeholder="Enter Subadmin Password"
-                                                @if (!empty($subadmindata['password'])) value="{{ $subadmindata['password'] }}" @endif>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="image">Image</label>
