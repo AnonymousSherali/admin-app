@@ -261,7 +261,4 @@ class AdminController extends Controller
         return view('admins.subadmins.update_roles')->with(compact('title', 'id'));
     }
 
-
-
-
 }
